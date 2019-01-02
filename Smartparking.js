@@ -112,7 +112,7 @@ app.post('/EliminarObjeto', function(req, res){
 
 	request(options, function (error, response, body) {
 	    if (!error && response.statusCode == 204) {
-	        console.log("El status de respuesta de eliminar es: " + response.statusCode);
+	        console.log("El status de respuesta de eliminar es:" + response.statusCode);
 	        res.send({"resultado":"success"}); 
 	    } else {
 	    	console.log("El error de respuesta de eliminar es: " + error);
