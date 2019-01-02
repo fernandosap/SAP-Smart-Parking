@@ -33050,7 +33050,7 @@ function speakBot(t, type) {
 					width: '150px',
 					height: '40px'
 				}),
-				src: "https://dl.dropboxusercontent.com/s/5f5nib1tgkoserf/holy_motion2.png" // n.expanderLogo - solexp
+				src: "/bestrunlogowhite.png" // n.expanderLogo - solexp
 			}), n.expanderTitle, n.onboardingMessage && a.default.createElement("div", {
 				className: "RecastAppExpander--onboarding"
 			}, n.onboardingMessage))
