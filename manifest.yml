@@ -1,0 +1,6 @@
+---
+applications:
+- name: Smartparking
+  memory: 512M
+  instances: 2
+  command: node Smartparking.js

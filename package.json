@@ -1,0 +1,21 @@
+{
+  "name": "SAPSmartParking",
+  "version": "1.0.0",
+  "description": "Aplicacion del SAP Now SmartParking",
+  "main": "Smartparking.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fernando Sánchez Lara",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "mail": "^0.2.3",
+    "nodemailer": "^4.6.8",
+    "npm": "^6.4.1",
+    "odata": "^0.4.0",
+    "request": "^2.88.0"
+  }
+}

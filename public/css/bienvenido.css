@@ -1,0 +1,23 @@
+#map {
+        height: 100%;
+      }
+
+html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+}
+
+.btn{
+	color:white !important;
+}
+
+#Reservdatetime{
+	text-align: center !important;
+	width: 250px !important;
+}
+
+#dropdownMenuButton{
+	margin-top: 20px;
+	margin-bottom: 40px;
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+    <title>Sign In Holy Motion</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.1/examples/sign-in/signin.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" action="#" onsubmit="Login();return false">
+      <img class="mb-4" src="/holy_motion.png" alt="" width="200" height="140">
+      <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" name="email" class="form-control" id="email" placeholder="Email address" required autofocus>
+      <label for="inputPassword" class="sr-only" >Password</label>
+      <input type="password" id="inputPassword" name="password" id="password" class="form-control" placeholder="Password" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <input type="submit" id="loginbutton" value="Log In" class="btn btn-lg btn-primary btn-block">
+      <a class="mt-5 mb-3 text-muted" href="/SignIn">You don't have an account? Sign in</a>
+      <p class="mt-5 mb-3 text-muted">&copy; HolyMotion 2018</p>
+    </form>
+  </body>
+</html>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/js/login.js"></script>
