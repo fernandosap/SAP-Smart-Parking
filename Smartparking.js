@@ -720,9 +720,3 @@ function yyyymmdd() {
     var dd = d < 10 ? '0' + d : d;
     return '' + y + '-' + mm + '-' + dd;
 }
-
-
-{
-  "channelId": "dev279dd4fb-5a3e-46fe-9b7b-2b20ee7c5dd1holymotion",
-  "channelSecret": "4RYlkDMqt0sS3ARuHLww28FOKA67ifVN"
-} 
