@@ -1,6 +1,6 @@
 ---
 applications:
-- name: Smartparking
+- name: SmartparkingEspanol
   memory: 512M
   instances: 2
-  command: node Smartparking.js
+  command: node SmartparkingEspanol.js

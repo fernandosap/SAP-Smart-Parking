@@ -16,16 +16,16 @@
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
           <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                  <a class="nav-link" href="/bienvenido">Home</a>
+                  <a class="nav-link" href="/bienvenido">Inicio</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="/MyAccount">My Account</a>
+                  <a class="nav-link" href="/MyAccount">Mi Cuenta</a>
               </li>
 <!--               <li class="nav-item">
                   <a class="nav-link" href="/OurTeam">Our Team</a>
               </li> -->
               <li class="nav-item">
-                  <a class="nav-link" href="/ContactUs">Contact Us</a>
+                  <a class="nav-link" href="/ContactUs">Contáctanos</a>
               </li>
           </ul>
       </div>
@@ -38,7 +38,7 @@
       <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                  <a class="nav-link" href="/">Sign Out</a>
+                  <a class="nav-link" href="/">Salir</a>
               </li>
           </ul>
       </div>
@@ -52,27 +52,27 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Modal title</h5>
+        <h5 class="modal-title" id="tituloModal">Crear Reservación/h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="text-center"> 
-          <p><b>Pick the date and time you would like to reserve </b></p>
-          <p>Start date: </p>
+          <p><b>Elige fecha y hora deseada de tu reserva: </b></p>
+          <p>Fecha inicial: </p>
           <p><input type="date" name="fecha_inicio" id="fecha_inicio"/></p>
-          <p>Start time: </p>
+          <p>Hora inicial: </p>
           <p><input type="time" name="hora_inicio" id="hora_inicio"/></p>
-          <p>End date: </p>
+          <p>Fecha final: </p>
           <p><input type="date" name="fecha_fin" id="fecha_fin"/></p>
-          <p>End time: </p>
+          <p>Hora final: </p>
           <p><input type="time" name="hora_fin" id="hora_fin"/></p>
           <p>
           <div class="dropdown">
 
             <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Select your car.
+              Selecciona tu vehículo.
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdownVehiculos">
@@ -83,8 +83,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="botonConfirmarReserva" onclick="confirmarReserva(); return false" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" id="botonConfirmarReserva" onclick="confirmarReserva(); return false" class="btn btn-primary">Crear reserva</button>
       </div>
     </div>
   </div>
@@ -96,21 +96,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Congratulations!</h5>
+        <h5 class="modal-title" id="tituloModal">¡Felicidades!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="text-center" id="MensajeModalConfirmacion"> 
-          <p><b>Your resevation has been succesfully saved. </b></p>
+          <p><b>Tu reservación ha sido generada exitosamente </b></p>
         </div>
         <div>
-        <p class="text-center" id="direccion_gmaps_boton"><a class="btn btn-success text-center" href="#" target="_blank" id="direccion_gmaps">Take me there!</a></p>
+        <p class="text-center" id="direccion_gmaps_boton"><a class="btn btn-success text-center" href="#" target="_blank" id="direccion_gmaps">¿Cómo llegar?</a></p>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

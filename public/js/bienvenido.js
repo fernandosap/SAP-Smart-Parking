@@ -159,11 +159,11 @@ function infoMensaje(marker){
           '</div>'+
           '<h2 id="firstHeading" class="firstHeading">'+marker.direccion+'</h2>'+
           '<div id="bodyContent">'+
-          '<p><b>Status:</b> Available</p>'+
-          '<p><b>Owner:</b> Jonathan Aguilar</p>'+
-          '<p><b>Cost per hour:</b> $2</p>'+
-          '<p><b>Time to get there:</b> 3 min</p>'+
-          '<p><button class="btn btn-lg btn-primary btn-block" onclick="reservar(\'' + String(marker.direccion).trim() + '\');return false" id="botonReservar">Reserve Spot!</button></p>'+
+          '<p><b>Estatus:</b> Disponible</p>'+
+          '<p><b>Estacionamiento:</b> Público</p>'+
+          '<p><b>Costo por hora:</b> $25</p>'+
+          '<p><b>Tiempo de llegada:</b> 3 min</p>'+
+          '<p><button class="btn btn-lg btn-primary btn-block" onclick="reservar(\'' + String(marker.direccion).trim() + '\');return false" id="botonReservar">¡Reservar Lugar!</button></p>'+
           // '<p>id_spot: '+ marker.id_marker + '</p>'+
           '</div></div>'
           ;

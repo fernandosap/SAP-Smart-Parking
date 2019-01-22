@@ -17,16 +17,16 @@
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
           <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                  <a class="nav-link" href="/bienvenido">Home</a>
+                  <a class="nav-link" href="/bienvenido">Inicio</a>
               </li>
               <li class="nav-item active">
-                  <a class="nav-link" href="/MyAccount">My Account</a>
+                  <a class="nav-link" href="/MyAccount">Mi Cuenta</a>
               </li>
 <!--               <li class="nav-item">
                   <a class="nav-link" href="/OurTeam">Our Team</a>
               </li> -->
               <li class="nav-item">
-                  <a class="nav-link" href="/ContactUs">Contact Us</a>
+                  <a class="nav-link" href="/ContactUs">Contáctanos</a>
               </li>
           </ul>
       </div>
@@ -39,7 +39,7 @@
       <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                  <a class="nav-link" href="/">Sign Out</a>
+                  <a class="nav-link" href="/">Salir</a>
               </li>
           </ul>
       </div>
@@ -55,28 +55,28 @@
             <button onclick="resetImage();return false" data-toggle="modal" data-target="#modalUploadPhoto" role="button" class="btn btn-sm"><i class="fas fa-edit" ></i></button>
             <h3><span id="NombreUsuario">Jonathan Alejandro Aguilar Morales</span></h3>
             <p id="CorreoUsuario">Jonathan.aguilar@sap.com</p>
-            <p id="NivelUsuario"><i class="fas fa-chess-king"></i>  Master Driver</span></p>
+            <p id="NivelUsuario"><i class="fas fa-chess-king"></i>  Conductor Maestro</span></p>
             <p id="PuntosUsuario">800 pts</p>
-            <p id="AgregarNuevoSpot"><a class="btn btn-success" data-toggle="modal" data-target="#modalCreacionSpot" role="button" onclick="AgregarNuevoSpot();return false">Register new spot</a></p>
-            <p><button id="AgregarNuevoVehiculo" class="btn btn-primary" data-toggle="modal" data-target="#modalCreacionVehiculo" onclick="AgregarNuevoVehiculo();return false" role="button">Register new Vehicle</button></p>
-            <p><button id="BotonPuerta" class="btn btn-secondary" role="button">Open Door / Close Door</button></p>
+            <p id="AgregarNuevoSpot"><a class="btn btn-success" data-toggle="modal" data-target="#modalCreacionSpot" role="button" onclick="AgregarNuevoSpot();return false">Registrar nuevo espacio</a></p>
+            <p><button id="AgregarNuevoVehiculo" class="btn btn-primary" data-toggle="modal" data-target="#modalCreacionVehiculo" onclick="AgregarNuevoVehiculo();return false" role="button">Registrar Nuevo Vehículo</button></p>
+            <p><button id="BotonPuerta" class="btn btn-secondary" role="button">Abrir Puerta / Cerrar Puerta</button></p>
     </div>
     <div class="col-lg-9">
-        <h3>Reservations</h3>
+        <h3>Reservaciones</h3>
 
         <div class="table-responsive">
         <table class="table table-hover" id="tabla_reservas">
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Place</th>
-              <th scope="col">Start Date</th>
-              <th scope="col">End Date</th>
-              <th scope="col">From</th>
-              <th scope="col">To</th>
-              <th scope="col">Cost</th>
-              <th scope="col">Car Plates</th>
-              <th scope="col">Status</th>
+              <th scope="col">Lugar</th>
+              <th scope="col">Inicio</th>
+              <th scope="col">Fin</th>
+              <th scope="col">Desde</th>
+              <th scope="col">Hasta</th>
+              <th scope="col">Costo</th>
+              <th scope="col">Placas</th>
+              <th scope="col">Estatus</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -88,7 +88,7 @@
         </div>
 
         <br>
-        <h3>Reservations of My Spots</h3>
+        <h3>Reservaciones De Mis Lugares</h3>
         <br>
 
         <div class="table-responsive">
@@ -96,14 +96,14 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Place</th>
-              <th scope="col">Start Date</th>
-              <th scope="col">End Date</th>
-              <th scope="col">From</th>
-              <th scope="col">To</th>
-              <th scope="col">Revenue</th>
-              <th scope="col">Car Plates</th>
-              <th scope="col">Status</th>
+              <th scope="col">Lugar</th>
+              <th scope="col">Inicio</th>
+              <th scope="col">Fin</th>
+              <th scope="col">Desde</th>
+              <th scope="col">Hasta</th>
+              <th scope="col">Ingreso</th>
+              <th scope="col">Placas</th>
+              <th scope="col">Estatus</th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
@@ -115,7 +115,7 @@
         </div>
 
         <br>
-        <h3>My Vehicles</h3>
+        <h3>Mis Vehículos</h3>
         <br>
 
         <div class="table-responsive">
@@ -123,9 +123,9 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Brand</th>
-              <th scope="col">Year</th>
-              <th scope="col">Plate</th>
+              <th scope="col">Marca</th>
+              <th scope="col">Año</th>
+              <th scope="col">Placas</th>
               <th scope="col">Color</th>
               <th scope="col"></th>
             </tr>
@@ -137,7 +137,7 @@
         </div>
 
         <br>
-        <h3>My Spots</h3>
+        <h3>Mis Lugares</h3>
         <br>
 
         <div class="table-responsive">
@@ -145,7 +145,7 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Address</th>
+              <th scope="col">Dirección</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -155,7 +155,7 @@
         </table>
         </div>
 
-        <h3>Alerts of my spots</h3>
+        <h3>Alertas</h3>
         <br>
 
         <div class="table-responsive">
@@ -163,9 +163,9 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Spot</th>
-              <th scope="col">Priority</th>
-              <th scope="col">Description</th>
+              <th scope="col">Lugar</th>
+              <th scope="col">Prioridad</th>
+              <th scope="col">Descripción</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -186,20 +186,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Add up new Spot.</h5>
+        <h5 class="modal-title" id="tituloModal">Sugiere un nuevo lugar</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="text-center" id="MensajeModalCreacionSpot"> 
-          <p><h4>Add the info of the spot you want to add.</h4></p>
+          <p><h4>Selecciona la ubicación del lugar</h4></p>
 
           <p><h5>User: </h5> 
             <input id="input_usuario_spot" type="text" name="Usuario" class="disabled" disabled>
           </p>
 
-          <p><h5>Address: </h5></p>
+          <p><h5>Dirección: </h5></p>
           <p>
             <div class="pac-card" id="pac-card">
               <div>
@@ -233,18 +233,18 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Congratulations</h5>
+        <h5 class="modal-title" id="tituloModal">Please Confirm</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="text-center"> 
-          <p><b id="MensajeModalConfirmacionSpot">You are sure you want to add the spot?</b></p>
+          <p><b id="MensajeModalConfirmacionSpot">¿Seguro de querer registrar ese lugar?</b></p>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="Close_modal_confirmacion_spot" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="Close_modal_confirmacion_spot" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -257,26 +257,26 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Add up new Vehicle.</h5>
+        <h5 class="modal-title" id="tituloModal">Agregar nuevo vehículo.</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="text-center" id="MensajeModalConfirmacion"> 
-          <p><h4>Add the info of the vehicle you want to add.</h4></p>
+          <p><h4>Agrega la información de tu nuevo vehículo</h4></p>
 
-          <p><h5>User: </h5> 
+          <p><h5>Usuario: </h5> 
             <input id="input_usuario" type="text" name="Usuario" class="disabled" disabled>
           </p>
 
-          <p><h5>Plates: </h5>
+          <p><h5>Placas: </h5>
             <input type="text" id="input_plates" name="Placa">
           </p>
 
           <p>
            <div class="form-group">
-            <label>Brand</label>
+            <label>Marca</label>
             <select class="form-control" id="dropdown_brand">
               <option>Ford</option>
               <option>Chevy</option>
@@ -285,7 +285,7 @@
               <option>Tesla</option>
               <option>Honda</option>
               <option>Renault</option>
-              <option>Other</option>
+              <option>Otra</option>
             </select>
           </div>
 
@@ -294,7 +294,7 @@
           <p>
             
           <div class="form-group">
-            <label>Year</label>
+            <label>Año</label>
             <select class="form-control" id="dropdown_year">
               <option>2019</option>
               <option>2018</option>
@@ -316,20 +316,20 @@
           <div class="form-group">
             <label>Color</label>
             <select class="form-control" id="dropdown_color">
-              <option>Red</option>
-              <option>Blue</option>
-              <option>White</option>
-              <option>Yellow</option>
-              <option>Orange</option>
-              <option>Black</option>
+              <option>Rojo</option>
+              <option>Azul</option>
+              <option>Blanco</option>
+              <option>Amarillo</option>
+              <option>Naranja</option>
+              <option>Negro</option>
             </select>
           </div>
           </p>
         </div>
       </div>
       <div class="modal-footer">
-        <button id="confirmarCreacionVehiculo" type="button" class="btn btn-primary" onclick="ConfirmarCreacionVehiculo();return false">Save</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="confirmarCreacionVehiculo" type="button" class="btn btn-primary" onclick="ConfirmarCreacionVehiculo();return false">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salvar</button>
       </div>
     </div>
   </div>
@@ -341,7 +341,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Congratulations!</h5>
+        <h5 class="modal-title" id="tituloModal">¡Felicidades!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -352,7 +352,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="Close_modal_confirmacion_vehiculo" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="Close_modal_confirmacion_vehiculo" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -364,7 +364,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Please Confirm</h5>
+        <h5 class="modal-title" id="tituloModal">Confirmación</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -375,7 +375,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="Close_modal_confirmacion_eliminado" class="btn btn-secondary" data-dismiss="modal">YES DELETE IT!</button>
+        <button type="button" id="Close_modal_confirmacion_eliminado" class="btn btn-secondary" data-dismiss="modal">¡Sí, eliminar!</button>
       </div>
     </div>
   </div>
@@ -387,7 +387,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Please upload the 3 required photos</h5>
+        <h5 class="modal-title" id="tituloModal">Carga 1/3 imágenes:</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -395,7 +395,7 @@
       
       <div class="modal-body text-center">
         <div class="text-center" id="MensajeModalConfirmacion"> 
-        <h5>We require 3 photos of your face, for the facial recognition to work:</h5>
+        <h5>Requerimos 3 imágenes para que el reconocimiento facial funcione:</h5>
       </div>
       <br>
         <input type="file" name="file" id="image_upload1" accept="image/*" onchange="cargarImagen(this.files);return false" required>
@@ -420,7 +420,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Please upload the 3 required photos</h5>
+        <h5 class="modal-title" id="tituloModal">Carga 2/3 imágenes:</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -428,7 +428,7 @@
       
       <div class="modal-body text-center">
         <div class="text-center" id="MensajeModalConfirmacion"> 
-        <h5>We require 3 photos of your face, for the facial recognition to work:</h5>
+        <h5>Requerimos 3 imágenes para que el reconocimiento facial funcione:</h5>
       </div>
       <br>
         <input type="file" name="file" id="image_upload1" accept="image/*" onchange="cargarImagen(this.files);return false" required>
@@ -453,7 +453,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Please upload the 3 required photos</h5>
+        <h5 class="modal-title" id="tituloModal">Carga 3/3 imágenes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -461,7 +461,7 @@
       
       <div class="modal-body text-center">
         <div class="text-center" id="MensajeModalConfirmacion"> 
-        <h5>We require 3 photos of your face, for the facial recognition to work:</h5>
+        <h5>Requerimos 3 imágenes para que el reconocimiento facial funcione:</h5>
       </div>
       <br>
         <input type="file" name="file" id="image_upload1" accept="image/*" onchange="cargarImagen(this.files);return false" required>
@@ -487,7 +487,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tituloModal">Info of the user.</h5>
+        <h5 class="modal-title" id="tituloModal">Información del usuario:</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -517,7 +517,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -535,7 +535,7 @@
 
 <script type="text/javascript" src="/js/MyAccount.js"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0rbbEkS3z5TmXztFgwzpiLHB0NT6N9mE&libraries=places&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqrE7b2Jcbi2hjn5FoxAxwjzV00JxOSXY&libraries=places&callback=initMap"
         async defer></script>
 
 <!-- gmaps javascript -->

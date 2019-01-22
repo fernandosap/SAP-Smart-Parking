@@ -17,14 +17,14 @@ $.post('/ConsultarEstatusPuerta',function(result){
   if(resultado == 0){
     id_cerrado = 1;
     console.log("Puerta Cerrada");
-    $("#BotonPuerta").text("Open Door");
+    $("#BotonPuerta").text("Abrir Puerta");
     $("#BotonPuerta").removeClass("btn-secondary").addClass("btn-warning");
     $("#BotonPuerta").on('click',puerta);
     // Checar como agregar una clase para el color del boton y el onclick 
   } else if (resultado == 1) {
     id_cerrado = 0;
     console.log("Puerta Abierta");
-    $("#BotonPuerta").text("Close Door");
+    $("#BotonPuerta").text("Cerrar Puerta");
     $("#BotonPuerta").removeClass("btn-secondary").addClass("btn-danger");
     $("#BotonPuerta").on('click',puerta);
     // Checar como agregar una clase para el color del boton y el onclick 
@@ -46,7 +46,7 @@ $.post("/consultarReservas",{id_usuario:usuario.ID_USUARIO},function(result){
       // console.log(reservas);
       if(reservas.length>0){
       for(i=0; i < reservas.length ;i++){
-        $("#tabla_reservas").append('<tr><th scope="row">' + reservas[i].ID_RESERVA + '</th><td>' + reservas[i].UBICACION_DESC + '</td><td>' + reservas[i].FECHA_INICIO + '</td><td>' + reservas[i].FECHA_FIN + '</td><td> ' + reservas[i].HORA_INICIO + '</td><td> ' + reservas[i].HORA_FIN + '</td><td>$' + Math.floor(Math.random()*100) + '</td><td>' + reservas[i].PLACA + '</td><td>' + reservas[i].ESTATUS + '</td><td><p><a class="btn btn-danger" onclick="EliminarObjeto(1,' + reservas[i].ID_RESERVA + '); return false" href="#"" role="button">Delete</a></td></tr>');
+        $("#tabla_reservas").append('<tr><th scope="row">' + reservas[i].ID_RESERVA + '</th><td>' + reservas[i].UBICACION_DESC + '</td><td>' + reservas[i].FECHA_INICIO + '</td><td>' + reservas[i].FECHA_FIN + '</td><td> ' + reservas[i].HORA_INICIO + '</td><td> ' + reservas[i].HORA_FIN + '</td><td>$' + Math.floor(Math.random()*100) + '</td><td>' + reservas[i].PLACA + '</td><td>' + reservas[i].ESTATUS + '</td><td><p><a class="btn btn-danger" onclick="EliminarObjeto(1,' + reservas[i].ID_RESERVA + '); return false" href="#"" role="button">Eliminar</a></td></tr>');
       }
     }
 });
@@ -66,11 +66,11 @@ $.post("/consultarSpots",{id_usuario:usuario.ID_USUARIO},function(result){
               console.log(reservas2[x]);
               if(reservas2[x].ID_RESERVA!=='undefined'){
                 if(reservas2[x].ESTATUS == 'Confirmed'){
-                  $("#tabla_reservas_spots").append('<tr><th scope="row">' + reservas2[x].ID_RESERVA + '</th><td>' +reservas2[x].UBICACION_DESC + '</td><td>' + reservas2[x].FECHA_INICIO + '</td><td>' + reservas2[x].FECHA_FIN + '</td><td> ' + reservas2[x].HORA_INICIO + '</td><td> ' + reservas2[x].HORA_FIN + '</td><td>$' + Math.floor(Math.random()*100) + '</td><td><a id="Placa_usuario" href="https://google.com" class="btn btn-warning" data-toggle="modal" data-target="#modalPlacasUsuario" role="button">' + reservas2[x].PLACA + '</a></td><td>' + reservas2[x].ESTATUS + '</td><td><a class="btn btn-danger" onclick="EliminarObjeto(2,' + reservas2[x].ID_RESERVA + '); return false" href="#"" role="button">Delete</a></td></tr>');
+                  $("#tabla_reservas_spots").append('<tr><th scope="row">' + reservas2[x].ID_RESERVA + '</th><td>' +reservas2[x].UBICACION_DESC + '</td><td>' + reservas2[x].FECHA_INICIO + '</td><td>' + reservas2[x].FECHA_FIN + '</td><td> ' + reservas2[x].HORA_INICIO + '</td><td> ' + reservas2[x].HORA_FIN + '</td><td>$' + Math.floor(Math.random()*100) + '</td><td><a id="Placa_usuario" href="https://google.com" class="btn btn-warning" data-toggle="modal" data-target="#modalPlacasUsuario" role="button">' + reservas2[x].PLACA + '</a></td><td>' + reservas2[x].ESTATUS + '</td><td><a class="btn btn-danger" onclick="EliminarObjeto(2,' + reservas2[x].ID_RESERVA + '); return false" href="#"" role="button">Eliminar</a></td></tr>');
                 } else if (reservas2[x].ESTATUS == 'Pending'){
-                  $("#tabla_reservas_spots").append('<tr><th scope="row">' + reservas2[x].ID_RESERVA + '</th><td>' +reservas2[x].UBICACION_DESC + '</td><td>' + reservas2[x].FECHA_INICIO + '</td><td>' + reservas2[x].FECHA_FIN + '</td><td> ' + reservas2[x].HORA_INICIO + '</td><td> ' + reservas2[x].HORA_FIN + '</td><td>$' + Math.floor(Math.random()*100) + '</td><td><a id="Placa_usuario" href="https://google.com" class="btn btn-warning" data-toggle="modal" data-target="#modalPlacasUsuario" role="button">' + reservas2[x].PLACA + '</a></td><td>' + reservas2[x].ESTATUS + '<td><p><a class="btn btn-success" onclick="ConfirmarObjeto(2,' + reservas2[x].ID_RESERVA + '); return false" href="#"" role="button">Confirm</a></td>' + '</td><td><p><a class="btn btn-danger" onclick="EliminarObjeto(2,' + reservas2[x].ID_RESERVA + '); return false" href="#"" role="button">Delete</a></td></tr>');
+                  $("#tabla_reservas_spots").append('<tr><th scope="row">' + reservas2[x].ID_RESERVA + '</th><td>' +reservas2[x].UBICACION_DESC + '</td><td>' + reservas2[x].FECHA_INICIO + '</td><td>' + reservas2[x].FECHA_FIN + '</td><td> ' + reservas2[x].HORA_INICIO + '</td><td> ' + reservas2[x].HORA_FIN + '</td><td>$' + Math.floor(Math.random()*100) + '</td><td><a id="Placa_usuario" href="https://google.com" class="btn btn-warning" data-toggle="modal" data-target="#modalPlacasUsuario" role="button">' + reservas2[x].PLACA + '</a></td><td>' + reservas2[x].ESTATUS + '<td><p><a class="btn btn-success" onclick="ConfirmarObjeto(2,' + reservas2[x].ID_RESERVA + '); return false" href="#"" role="button">Confirmar</a></td>' + '</td><td><p><a class="btn btn-danger" onclick="EliminarObjeto(2,' + reservas2[x].ID_RESERVA + '); return false" href="#"" role="button">Eliminar</a></td></tr>');
                 } else {
-                    $("#tabla_reservas_spots").append('<tr><th scope="row">' + reservas2[x].ID_RESERVA + '</th><td>' +reservas2[x].UBICACION_DESC + '</td><td>' + reservas2[x].FECHA_INICIO + '</td><td>' + reservas2[x].FECHA_FIN + '</td><td> ' + reservas2[x].HORA_INICIO + '</td><td> ' + reservas2[x].HORA_FIN + '</td><td>$' + Math.floor(Math.random()*100) + '</td><td><a id="Placa_usuario" href="https://google.com" class="btn btn-warning" data-toggle="modal" data-target="#modalPlacasUsuario" role="button">' + reservas2[x].PLACA + '</a></td><td>' + reservas2[x].ESTATUS + '</td><td><a class="btn btn-danger" onclick="EliminarObjeto(2,' + reservas2[x].ID_RESERVA + '); return false" href="#"" role="button">Delete</a></td></tr>');
+                    $("#tabla_reservas_spots").append('<tr><th scope="row">' + reservas2[x].ID_RESERVA + '</th><td>' +reservas2[x].UBICACION_DESC + '</td><td>' + reservas2[x].FECHA_INICIO + '</td><td>' + reservas2[x].FECHA_FIN + '</td><td> ' + reservas2[x].HORA_INICIO + '</td><td> ' + reservas2[x].HORA_FIN + '</td><td>$' + Math.floor(Math.random()*100) + '</td><td><a id="Placa_usuario" href="https://google.com" class="btn btn-warning" data-toggle="modal" data-target="#modalPlacasUsuario" role="button">' + reservas2[x].PLACA + '</a></td><td>' + reservas2[x].ESTATUS + '</td><td><a class="btn btn-danger" onclick="EliminarObjeto(2,' + reservas2[x].ID_RESERVA + '); return false" href="#"" role="button">Eliminar</a></td></tr>');
                 };
               };
             };
@@ -85,7 +85,7 @@ $.post("/consultarCoches",{id_usuario:usuario.ID_USUARIO},function(result){
       var tabla = "vehiculos";
       // console.log(vehiculos);
       for(i=0; i < vehiculos.length ;i++){
-        $("#tabla_my_vehicles").append('<tr><th scope="row">' + vehiculos[i].ID_VEHICULO + '</th><td>' + vehiculos[i].MARCA + '</td><td>' + vehiculos[i].ANIO + '</td><td>' + vehiculos[i].PLACA + '</td><td> ' + vehiculos[i].COLOR + '</td><td>' +'</td><td><p><a class="btn btn-danger" onclick="EliminarObjeto(3,' + vehiculos[i].ID_VEHICULO + '); return false" href="#" role="button">Delete</a></td></tr>');
+        $("#tabla_my_vehicles").append('<tr><th scope="row">' + vehiculos[i].ID_VEHICULO + '</th><td>' + vehiculos[i].MARCA + '</td><td>' + vehiculos[i].ANIO + '</td><td>' + vehiculos[i].PLACA + '</td><td> ' + vehiculos[i].COLOR + '</td><td>' +'</td><td><p><a class="btn btn-danger" onclick="EliminarObjeto(3,' + vehiculos[i].ID_VEHICULO + '); return false" href="#" role="button">Eliminar</a></td></tr>');
     }
 });
 
@@ -95,7 +95,7 @@ $.post("/consultarSpots",{id_usuario:usuario.ID_USUARIO},function(result){
       var tabla = "spots";
       // console.log(spots);
       for(i=0; i < spots.length ;i++){
-        $("#tabla_my_spots").append('<tr><th scope="row">' + spots[i].ID_SPOT + '</th><td>' + spots[i].DIRECCION + '</td>' + '<td><p><a class="btn btn-danger" onclick="EliminarObjeto(4,' + spots[i].ID_SPOT + '); return false" href="#" role="button">Delete</a></td></tr>');
+        $("#tabla_my_spots").append('<tr><th scope="row">' + spots[i].ID_SPOT + '</th><td>' + spots[i].DIRECCION + '</td>' + '<td><p><a class="btn btn-danger" onclick="EliminarObjeto(4,' + spots[i].ID_SPOT + '); return false" href="#" role="button">Eliminar</a></td></tr>');
     }
 });
 
@@ -122,7 +122,7 @@ $.post("/consultarSpots",{id_usuario:usuario.ID_USUARIO},function(result){
                 } else if(alerts[i].ID_ALERTA==4){
                   alerta_desc = "Door Open";
                   priority = "High";
-                  $("#tabla_alert_my_spots").append('<tr><th scope="row">' + alerts[i].ID_ALERTA + '</th><td>' + alerts[i].ID_SPOT + '</td>' + '<td>' + priority + '</td>' + '<td>' + alerta_desc + '</td>' + '<td><p><a class="btn btn-danger" onclick="EliminarObjeto(4,' + alerts[i].PLACA + '); return false" href="#" role="button">Delete</a></td></tr>');
+                  $("#tabla_alert_my_spots").append('<tr><th scope="row">' + alerts[i].ID_ALERTA + '</th><td>' + alerts[i].ID_SPOT + '</td>' + '<td>' + priority + '</td>' + '<td>' + alerta_desc + '</td>' + '<td><p><a class="btn btn-danger" onclick="EliminarObjeto(4,' + alerts[i].PLACA + '); return false" href="#" role="button">Eliminar</a></td></tr>');
                 };
            }
        });
@@ -148,7 +148,7 @@ $.post("/CrearCoche",{"info":info},function(result){
     resultado = result.resultado;
     if (resultado == "success"){
         console.log(resultado);
-        mensaje = "Your vehicle was added successfully";
+        mensaje = "Tu vehículo fue añadido satisfactoriamente";
         console.log(mensaje);
       } else {
         mensaje = "Hubo un error en tu reservación. Inténtalo de nuevo más tarde."
@@ -180,7 +180,7 @@ function confirmarCreacionSpot(){
           mensaje = "Tu Spot se ha agregado de manera exitosa";
           console.log("Se realizó el post satisfactoriamente.");
           $("#modalCreacionSpot").modal('hide');
-          $("#MensajeModalConfirmacionSpot").text("Your spot has been saved successfully");
+          $("#MensajeModalConfirmacionSpot").text("Tu lugar ha sido guardado satisfactoriamente");
           $("#modalConfirmacionCreacionSpot").modal('show');
           $("#Close_modal_confirmacion_spot").on('click',function(){
             location.reload();
@@ -204,18 +204,18 @@ function EliminarObjeto(tabla,id_objeto){
     texto_mensaje = "spot"
   };
   console.log(tabla_eliminar);
-  mensaje_confirmacion = "You are sure you want to delete this " + texto_mensaje; 
+  mensaje_confirmacion = "Estas seguro de querer eliminar " + texto_mensaje + " ?"; 
   $("#MensajeModalConfirmacionConfirmacion").text(mensaje_confirmacion);
   $("#modalConfirmacionVehiculoEliminado").modal('show');
   $("#Close_modal_confirmacion_eliminado").on('click',function(){ 
     console.log(tabla + " " + id_objeto);
     $.post('/EliminarObjeto', {"tabla":tabla_eliminar, "id_objeto":id_objeto}, function(result){
       var resultado = result.resultado;
-      mensaje = "Your " + texto_mensaje + " was deleted successfully";
+      mensaje = "Tu " + texto_mensaje + " ha sido eliminado satisfactoriamente";
       console.log(resultado);
       if (resultado == "success"){
           console.log("Se realizó el post satisfactoriamente.");
-          $("#modalConfirmacionVehiculoEliminado").modal('hide');
+          $("#modalConfirmacionVehiculo|o").modal('hide');
           $("#MensajeModalConfirmacionVehiculo").text(mensaje);
           $("#modalConfirmacionVehiculo").modal('show');
           $("#Close_modal_confirmacion_vehiculo").on('click',function(){
@@ -240,7 +240,7 @@ function ConfirmarObjeto(tabla,id_objeto){
     texto_mensaje = "spot"
   };
   console.log(tabla_confirmar);
-  mensaje_confirmacion = "You are sure you want to confirm this " + texto_mensaje; 
+  mensaje_confirmacion = "Estas seguro de querer confirmar " + texto_mensaje + " ?"; 
   $("#MensajeModalConfirmacionConfirmacion").text(mensaje_confirmacion);
   $("#Close_modal_confirmacion_eliminado").text("YES CONFIRM!")
   $("#modalConfirmacionVehiculoEliminado").modal('show');
@@ -248,7 +248,7 @@ function ConfirmarObjeto(tabla,id_objeto){
     console.log(tabla + " " + id_objeto);
     $.post('/ConfirmarObjeto', {"tabla":tabla_confirmar, "id_objeto":id_objeto}, function(result){
       var resultado = result.resultado;
-      mensaje = "Your " + texto_mensaje + " was confirmed successfully";
+      mensaje = "Tu " + texto_mensaje + " fue confirmado satisfactoriamente";
       console.log(resultado);
       if (resultado == "success"){
           console.log("Se realizó el post satisfactoriamente.");
