@@ -461,20 +461,28 @@ app.post('/crearReserva',function(req,res){
 
 				var options = {
 				method:'GET',
-				  url: 'https://i861443trial.authentication.eu10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
+				url: 'https://i848070trial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
+				// url: 'https://innovator.authentication.eu10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
+				  // url: 'https://i861443trial.authentication.eu10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
 				  headers: {
-				    'Authorization': 'Basic c2ItMDJkNmZlZmEtNTg3Yy00YTMzLWE3NzMtNjBhMTYwZThkYTRkIWIxMDI1OHxuYS00MjBhZGZjOS1mOTZlLTQwOTAtYTY1MC0wMzg2OTg4YjY3ZTAhYjE4MzY6WHdIbVhtMDBJTWJSbnZmWndscndQSEJ4TXlnPQ=='
+				    'Authorization': 'Basic c2ItZDIwNzlmYzItZjg0Ni00ZjhmLWE0N2MtZDBmYmU0YTM1YWI2IWIxNTg5fG5hLTNhMDFmMWUyLWJjMzMtNGUxMi04NmEyLWZmZmZhZWE3OTkxOCFiMzM6R3BxQ2NSYS9tQ25qS1dRTDdNY0w4U1VmRmdvPQ=='
 				  }
 				};
 
 				request(options,function(error,response,body){
 					console.log("TOKEN -----------------------------")
 					cuerpo = JSON.parse(body)
+					if(error){
+						console.log(error);
+					}
 					// post a blockchain
+					console.log(cuerpo);
 
 					var options = {
 					method:'POST',
-					  url: 'https://hyperledger-fabric.cfapps.eu10.hana.ondemand.com/api/v1/chaincodes/279dd4fb-5a3e-46fe-9b7b-2b20ee7c5dd1-com-sap-icn-blockchain-holymotion-booking/latest/' + numero_nuevo,
+					url: 'https://hyperledger-fabric.cfapps.us10.hana.ondemand.com/api/v1/chaincodes/8a8a09c1-2ef9-4a2b-bcc0-fa896d1af9dc-com-sap-icn-blockchain-sapsmartparking-booking/latest/' + numero_nuevo,
+					// url: 'https://hyperledger-fabric.cfapps.eu10.hana.ondemand.com/api/v1/chaincodes/2ddcc9f0-bdc0-4ef4-89b9-870622edcfb2-com-sap-icn-blockchain-holymotion-booking/latest/' + numero_nuevo,
+					  // url: 'https://hyperledger-fabric.cfapps.eu10.hana.ondemand.com/api/v1/chaincodes/279dd4fb-5a3e-46fe-9b7b-2b20ee7c5dd1-com-sap-icn-blockchain-holymotion-booking/latest/' + numero_nuevo,
 					  headers: {
 					    'Authorization': 'bearer ' + cuerpo.access_token,
 					    'Content-type': 'application/x-www-form-urlencoded'
@@ -483,9 +491,13 @@ app.post('/crearReserva',function(req,res){
 					};
 
 					request(options,function(error,response,body){
+						if(error){
+							console.log("Hubo un error al intentar escribir en blockchain " + error)
+						} else {
+						console.log("Se escribio a blockchain de manera correcta");
 						console.log(options);
 						res.send({"resultado":"success","id_reserva":data.d.ID_RESERVA}); 
-
+						}
 					});
 
 				});
