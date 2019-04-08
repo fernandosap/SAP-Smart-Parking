@@ -98,16 +98,29 @@ if (navigator.geolocation) {
 
                console.log(info);
 
+              if($("#fecha_inicio").val()==""||$("#fecha_fin").val()==""||$("#hora_inicio").val()==""||$("#hora_fin").val()==""){
+                console.log("alguno de los valores esta en blanco");
+              } else {
               $.post( "/crearReserva",info,function(result) {
                 resultado = result.resultado;
                 console.log(result.resultado);
                 console.log(result.id_reserva);
                 if (resultado == "success"){
                   mensaje = "Tu reserva se realizó de manera exitosa. <p> El id de tu reserva es: " + result.id_reserva + "</p>"
+                  $("#fecha_inicio").val("");
+                  $("#fecha_fin").val("");
+                  $("#hora_inicio").val("");
+                  $("#hora_fin").val("");
+                  info = "";
                   $("#direccion_gmaps").attr('href',String(marcador.direccion_gmaps));
                   $("#direccion_gmaps_boton").show();
                 } else {
-                  mensaje = "Hubo un error en tu reservación. Inténtalo de nuevo más tarde."
+                  mensaje = "Realizando reservación ... Espera unos segundos";
+                  $("#fecha_inicio").val("");
+                  $("#fecha_fin").val("");
+                  $("#hora_inicio").val("");
+                  $("#hora_fin").val("");
+                  info = "";
                   $("#direccion_gmaps_boton").hide();
                 }
                 console.log("Se realizó el post satisfactoriamente.");
@@ -116,6 +129,7 @@ if (navigator.geolocation) {
                 $("#modalConfirmacion").modal('show');
                 infowindow.close();
               });
+            };
           });
       console.log("Proceso de carga de mapa terminado");
           });

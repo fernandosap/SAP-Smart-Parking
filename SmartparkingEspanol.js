@@ -6,11 +6,11 @@ var request = require('request');
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'holymotion.notifications@gmail.com',
-    pass: 'Welcome1.'
-  }
+	service: 'gmail',
+	auth: {
+		user: 'holymotion.notifications@gmail.com',
+		pass: 'Welcome1.'
+	}
 });
 
 app.use(bodyParser.json());
@@ -52,7 +52,7 @@ app.get('/home', function(req,res){
 });
 
 app.listen(port, function(req,res){
-   console.log("Servidor Corriendo en puerto: " + port); 
+	console.log("Servidor Corriendo en puerto: " + port); 
 });
 
 app.get('/Signin', function(req,res){
@@ -100,24 +100,59 @@ app.post('/EliminarObjeto', function(req, res){
 
 	// opciones para configuración del DELETE
 	var options = {
-	    url: "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/"+ tabla +"(" + id_objeto +")",
-	    method: 'DELETE',
-	    auth: {
-	    'user': 'i848070',
-	    'pass': 'Welcome1.'
+		url: "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/"+ tabla +"(" + id_objeto +")",
+		method: 'DELETE',
+		auth: {
+			'user': 'i848070',
+			'pass': 'Welcome1.'
 		}
 	};
 
 	console.log(options.url);
 
 	request(options, function (error, response, body) {
-	    if (!error && response.statusCode == 204) {
-	        console.log("El status de respuesta de eliminar es:" + response.statusCode);
-	        res.send({"resultado":"success"}); 
-	    } else {
-	    	console.log("El error de respuesta de eliminar es: " + error);
-	    	res.send({"resultado":"fail"}); 
-	    };
+		if (!error && response.statusCode == 204) {
+			if(tabla == "reservas"){
+				var options = {
+					method:'GET',
+					url: 'https://i848070trial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
+					headers: {
+						'Authorization': 'Basic c2ItZDIwNzlmYzItZjg0Ni00ZjhmLWE0N2MtZDBmYmU0YTM1YWI2IWIxNTg5fG5hLTNhMDFmMWUyLWJjMzMtNGUxMi04NmEyLWZmZmZhZWE3OTkxOCFiMzM6R3BxQ2NSYS9tQ25qS1dRTDdNY0w4U1VmRmdvPQ=='
+					}
+				};
+
+				request(options,function(error,response,body){
+					console.log("TOKEN -----------------------------")
+					cuerpo = JSON.parse(body)
+					if(error){
+						console.log(error);
+					}
+					// post a blockchain
+					console.log(cuerpo);
+
+					var options = {
+						method:'DELETE',
+						url: 'https://hyperledger-fabric.cfapps.us10.hana.ondemand.com/api/v1/chaincodes/8a8a09c1-2ef9-4a2b-bcc0-fa896d1af9dc-com-sap-icn-blockchain-sapsmartparking-booking/latest/' + id_objeto,
+						headers: {
+							'Authorization': 'bearer ' + cuerpo.access_token,
+							'Content-type': 'application/x-www-form-urlencoded'
+						}
+					};
+
+					request(options,function(error,response,body){
+						if(error){
+							console.log("there's an error with blockchain");
+						}
+						console.log(options);
+						console.log("El status de respuesta de eliminar es:" + response.statusCode);
+						res.send({"resultado":"success"}); 
+					});
+				});
+			} else {
+			console.log("El error de respuesta de eliminar es: " + error);
+			res.send({"resultado":"fail"}); 
+			};
+		};
 	});
 });
 
@@ -131,11 +166,11 @@ app.post('/ConfirmarObjeto', function(req, res){
 		reserva = data.d.results;
 		// opciones para configuración del DELETE
 		var options = {
-		    url: "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/"+ tabla +"(" + id_objeto +")",
-		    method: 'PUT',
-		    auth: {
-		    'user': 'i848070',
-		    'pass': 'Welcome1.'
+			url: "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/"+ tabla +"(" + id_objeto +")",
+			method: 'PUT',
+			auth: {
+				'user': 'i848070',
+				'pass': 'Welcome1.'
 			},
 			json: {
 				ID_RESERVA: reserva[0].ID_RESERVA,
@@ -156,29 +191,29 @@ app.post('/ConfirmarObjeto', function(req, res){
 		console.log(options.url);
 
 		request(options, function (error, response, body) {
-		    if (!error && response.statusCode == 204) {
-		        console.log("El status de respuesta de confirmar es: " + response.statusCode);
+			if (!error && response.statusCode == 204) {
+				console.log("El status de respuesta de confirmar es: " + response.statusCode);
 
 				var mailOptions = {
-				  from: 'holymotion.notifications@gmail.com',
-				  to: 'fernando.sanchez@sap.com',
-				  subject: 'Your reservation of the spot ' + reserva[0].UBICACION_DESC + ' in HolyMotion has been confirmed!',
-				  html: '<h2> Access your account at http://holymotionjs.cfapps.eu10.hana.ondemand.com/MyAccount in order to review your spot status. </h2>'
+					from: 'holymotion.notifications@gmail.com',
+					to: 'fernando.sanchez@sap.com',
+					subject: 'Your reservation of the spot ' + reserva[0].UBICACION_DESC + ' in HolyMotion has been confirmed!',
+					html: '<h2> Access your account at http://holymotionjs.cfapps.eu10.hana.ondemand.com/MyAccount in order to review your spot status. </h2>'
 				};
 
 				transporter.sendMail(mailOptions, function(error, info){
-				  if (error) {
-				    console.log(error);
-				  } else {
-				    console.log('Email sent: ' + info.response);
-				    res.send({"resultado":"success"});
-				  }
+					if (error) {
+						console.log(error);
+					} else {
+						console.log('Email sent: ' + info.response);
+						res.send({"resultado":"success"});
+					}
 				});
 
-		    } else {
-		    	console.log("El error de respuesta de confirmar es: " + error);
-		    	res.send({"resultado":"fail"}); 
-		    };
+			} else {
+				console.log("El error de respuesta de confirmar es: " + error);
+				res.send({"resultado":"fail"}); 
+			};
 		});
 
 	})
@@ -194,11 +229,11 @@ app.post('/ActualizarImagenes', function(req, res){
 		usuario = data.d.results;
 		// opciones para configuración del DELETE
 		var options = {
-		    url: "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/usuarios(" + id_usuario +")",
-		    method: 'PUT',
-		    auth: {
-		    'user': 'i848070',
-		    'pass': 'Welcome1.'
+			url: "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/usuarios(" + id_usuario +")",
+			method: 'PUT',
+			auth: {
+				'user': 'i848070',
+				'pass': 'Welcome1.'
 			},
 			json: {
 				ID_USUARIO: usuario[0].ID_USUARIO,
@@ -220,13 +255,13 @@ app.post('/ActualizarImagenes', function(req, res){
 		console.log(options.url);
 
 		request(options, function (error, response, body) {
-		    if (!error && response.statusCode == 204) {
-		       console.log("Imagenes y usuario actualizado");
-		       res.send({"resultado":"success"});
-		    } else {
-		    	console.log("El error de respuesta de confirmar es: " + error);
-		    	res.send({"resultado":"fail"}); 
-		    };
+			if (!error && response.statusCode == 204) {
+				console.log("Imagenes y usuario actualizado");
+				res.send({"resultado":"success"});
+			} else {
+				console.log("El error de respuesta de confirmar es: " + error);
+				res.send({"resultado":"fail"}); 
+			};
 		});
 
 	})
@@ -240,19 +275,19 @@ app.post('/CrearSpot', function(req,res){
 		numero_nuevo = Number(data.d.results[0].ID_SPOT) + 1;
 		console.log(numero_nuevo);
 		url = "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/spots";
-			info = {
-				"ID_SPOT": numero_nuevo,
-				"ID_USUARIO": Number(req.body.ID_USUARIO),
-				"DIRECCION": req.body.DIRECCION
-			};
-			console.log(info);
-			o(url).post(info).save(function(data){
-				console.log("Información agregada satisfactoriamente");
-				res.send({"resultado":"success"});  
-			}, function(status, error){
-				console.error(status + " " + error);
-				res.send({"resultado":"error"});  
-			});
+		info = {
+			"ID_SPOT": numero_nuevo,
+			"ID_USUARIO": Number(req.body.ID_USUARIO),
+			"DIRECCION": req.body.DIRECCION
+		};
+		console.log(info);
+		o(url).post(info).save(function(data){
+			console.log("Información agregada satisfactoriamente");
+			res.send({"resultado":"success"});  
+		}, function(status, error){
+			console.error(status + " " + error);
+			res.send({"resultado":"error"});  
+		});
 	});
 });
 
@@ -263,28 +298,28 @@ app.post('/CrearCoche', function(req,res){
 		numero_nuevo = Number(data.d.results[0].ID_VEHICULO) + 1;
 		console.log(numero_nuevo);
 		url = "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/vehiculos";
-			info = {
-				"ID_VEHICULO": numero_nuevo,
-				"ID_USUARIO": Number(req.body.info.ID_USUARIO),
-				"MARCA": req.body.info.MARCA,
-				"ANIO": req.body.info.ANIO,
-				"PLACA": req.body.info.PLACA,
-				"COLOR": req.body.info.COLOR_COCHE 
-			};
-			console.log(info);
-			o(url).post(info).save(function(data){
-				console.log("Información agregada satisfactoriamente");
-				res.send({"resultado":"success"});  
-			}, function(status, error){
-				console.error(status + " " + error);
-				res.send({"resultado":"error"});  
-			});
+		info = {
+			"ID_VEHICULO": numero_nuevo,
+			"ID_USUARIO": Number(req.body.info.ID_USUARIO),
+			"MARCA": req.body.info.MARCA,
+			"ANIO": req.body.info.ANIO,
+			"PLACA": req.body.info.PLACA,
+			"COLOR": req.body.info.COLOR_COCHE 
+		};
+		console.log(info);
+		o(url).post(info).save(function(data){
+			console.log("Información agregada satisfactoriamente");
+			res.send({"resultado":"success"});  
+		}, function(status, error){
+			console.error(status + " " + error);
+			res.send({"resultado":"error"});  
+		});
 	});
 	// id de vehiculo, id de usuario, marca, anio, placa y el color
 });
 
 app.post('/consultarReservas',function(req,res){
-id_usuario = req.body.id_usuario;
+	id_usuario = req.body.id_usuario;
 	url = "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/reservas?$filter=ID_USUARIO_RESERVA eq " + id_usuario
 	o(url).get(function(data){
 		reservas = data.d.results;
@@ -294,8 +329,8 @@ id_usuario = req.body.id_usuario;
 });
 
 app.post('/consultarReservasPorSpot',function(req,res){
-spot = req.body.spot_id;
-console.log(spot);
+	spot = req.body.spot_id;
+	console.log(spot);
 	url = "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/reservas?$filter=ID_SPOT eq " + spot
 	o(url).get(function(data){
 		reservas = data.d.results;
@@ -373,10 +408,10 @@ app.post('/SignUp', function(req,res){
 					console.error(status + " " + error);
 					res.send({"resultado":"error"});  
 				});
-				}, function(status) {
+			}, function(status) {
 			console.error(status); // error with status
-			});
-			} else {
+		});
+		} else {
 			console.log("enviando resultado existente")
 			res.send({"resultado":"existente"});
 		};
@@ -406,8 +441,8 @@ app.post('/validarLogin', function(req,res){
 			}
 			console.log(data.d.results[0]);
 			if(pass == data.d.results[0].PASSWORD){
-			console.log('Usuario autenticado satisfactoriamente: ' + email);
-			res.json({"login":true,user:user});
+				console.log('Usuario autenticado satisfactoriamente: ' + email);
+				res.json({"login":true,user:user});
 			} else {
 				console.log('Usuario no autenticado: ' + email);
 				res.send({"login":false});
@@ -418,7 +453,7 @@ app.post('/validarLogin', function(req,res){
 		}
 	}, function(status) {
 	console.error(status); // error with status
-	});
+});
 });
 
 app.post('/crearReserva',function(req,res){
@@ -440,32 +475,32 @@ app.post('/crearReserva',function(req,res){
 		console.log(fecha1);
 		console.log(fecha2);
 
-			info = {
-				ID_RESERVA: numero_nuevo,
-				ID_SPOT: Number(req.body.ID_SPOT),
-				ID_USUARIO_RESERVA: Number(req.body.ID_USUARIO_RESERVA),
-				FECHA_INICIO: req.body.FECHA_INICIO,
-				FECHA_FIN: req.body.FECHA_FIN,
-				HORA_INICIO: req.body.HORA_INICIO,
-				HORA_FIN: req.body.HORA_FIN,
-				UBICACION_DESC: req.body.UBICACION_DESC,
-				FECHA_RENT_INICIO: '/Date('+ (fecha1.getTime()) +')/',
-				FECHA_RENT_FIN: '/Date('+ (fecha2.getTime())+')/',
-				PLACA: req.body.PLACA,
-				ESTATUS: "Pending"
-			}
-			console.log(info);
-			o(url).post(info).save(function(data){
+		info = {
+			ID_RESERVA: numero_nuevo,
+			ID_SPOT: Number(req.body.ID_SPOT),
+			ID_USUARIO_RESERVA: Number(req.body.ID_USUARIO_RESERVA),
+			FECHA_INICIO: req.body.FECHA_INICIO,
+			FECHA_FIN: req.body.FECHA_FIN,
+			HORA_INICIO: req.body.HORA_INICIO,
+			HORA_FIN: req.body.HORA_FIN,
+			UBICACION_DESC: req.body.UBICACION_DESC,
+			FECHA_RENT_INICIO: '/Date('+ (fecha1.getTime()) +')/',
+			FECHA_RENT_FIN: '/Date('+ (fecha2.getTime())+')/',
+			PLACA: req.body.PLACA,
+			ESTATUS: "Pending"
+		}
+		console.log(info);
+		o(url).post(info).save(function(data){
 
 				// obtener bearer de blockchain
 
 				var options = {
-				method:'GET',
-				url: 'https://i848070trial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
+					method:'GET',
+					url: 'https://i848070trial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
 				// url: 'https://innovator.authentication.eu10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
 				  // url: 'https://i861443trial.authentication.eu10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
 				  headers: {
-				    'Authorization': 'Basic c2ItZDIwNzlmYzItZjg0Ni00ZjhmLWE0N2MtZDBmYmU0YTM1YWI2IWIxNTg5fG5hLTNhMDFmMWUyLWJjMzMtNGUxMi04NmEyLWZmZmZhZWE3OTkxOCFiMzM6R3BxQ2NSYS9tQ25qS1dRTDdNY0w4U1VmRmdvPQ=='
+				  	'Authorization': 'Basic c2ItZDIwNzlmYzItZjg0Ni00ZjhmLWE0N2MtZDBmYmU0YTM1YWI2IWIxNTg5fG5hLTNhMDFmMWUyLWJjMzMtNGUxMi04NmEyLWZmZmZhZWE3OTkxOCFiMzM6R3BxQ2NSYS9tQ25qS1dRTDdNY0w4U1VmRmdvPQ=='
 				  }
 				};
 
@@ -479,13 +514,13 @@ app.post('/crearReserva',function(req,res){
 					console.log(cuerpo);
 
 					var options = {
-					method:'POST',
-					url: 'https://hyperledger-fabric.cfapps.us10.hana.ondemand.com/api/v1/chaincodes/8a8a09c1-2ef9-4a2b-bcc0-fa896d1af9dc-com-sap-icn-blockchain-sapsmartparking-booking/latest/' + numero_nuevo,
+						method:'POST',
+						url: 'https://hyperledger-fabric.cfapps.us10.hana.ondemand.com/api/v1/chaincodes/8a8a09c1-2ef9-4a2b-bcc0-fa896d1af9dc-com-sap-icn-blockchain-sapsmartparking-booking/latest/' + numero_nuevo,
 					// url: 'https://hyperledger-fabric.cfapps.eu10.hana.ondemand.com/api/v1/chaincodes/2ddcc9f0-bdc0-4ef4-89b9-870622edcfb2-com-sap-icn-blockchain-holymotion-booking/latest/' + numero_nuevo,
 					  // url: 'https://hyperledger-fabric.cfapps.eu10.hana.ondemand.com/api/v1/chaincodes/279dd4fb-5a3e-46fe-9b7b-2b20ee7c5dd1-com-sap-icn-blockchain-holymotion-booking/latest/' + numero_nuevo,
 					  headers: {
-					    'Authorization': 'bearer ' + cuerpo.access_token,
-					    'Content-type': 'application/x-www-form-urlencoded'
+					  	'Authorization': 'bearer ' + cuerpo.access_token,
+					  	'Content-type': 'application/x-www-form-urlencoded'
 					  },
 					  form: 'placa='+ info.PLACA +'&idlugar='+info.ID_SPOT+'&fechahorainicio='+fecha1.toISOString()+'&fechahorafin='+fecha2.toISOString()+'&estatus='+info.ESTATUS+'&usuario='+req.body.NOMBRE_USUARIO
 					};
@@ -507,16 +542,16 @@ app.post('/crearReserva',function(req,res){
 app.post('/contarSpots',function(req,res){
 	url = "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/spots"
 	o(url).get(function(data) {
-				numero_nuevo = Number(data.d.results.length);
-				res.send({"contador":numero_nuevo,"spots":data});
+		numero_nuevo = Number(data.d.results.length);
+		res.send({"contador":numero_nuevo,"spots":data});
 	});
 });
 
 app.post('/nuevoIDReserva',function(req,res){
 	url = "https://xs01b14ae55f1.us1.hana.ondemand.com/HOLY_MOTION/usuarios.xsodata/reservas"
 	o(url).get(function(data) {
-				numero_nuevo = Number(data.d.results.length);
-				res.send({"ultima_reserva":numero_nuevo,"reservas":data});
+		numero_nuevo = Number(data.d.results.length);
+		res.send({"ultima_reserva":numero_nuevo,"reservas":data});
 	});
 });
 
@@ -561,57 +596,57 @@ app.post('/consultarSpotsRecast',function(req,res){
 		spots = data.d.results;
 		console.log(spots);
 		res.send({
-		    replies: [{
-			    "type": "list",
-			    "content": {
-			      "elements": [
-			        {
-			          "title": spots[0].DIRECCION,
-			          "imageUrl": "https://dqbasmyouzti2.cloudfront.net/assets/content/cache/made/content/images/articles/Office_Buildings_Demand_Response_XL_721_420_80_s_c1.jpg",
-			          "subtitle": "2.8km $2 per hour",
-			          "buttons": [
-			            {
-			              "title": "Reserve",
-			              "type": "BUTTON_TYPE",
-			              "value": "Quiero confirmar mi reserva en el lugar "  + spots[0].ID_SPOT,
-			            }
-			          ]
-			        },
-			        {
-			          "title": spots[1].DIRECCION,
-			          "imageUrl": "https://2qibqm39xjt6q46gf1rwo2g1-wpengine.netdna-ssl.com/wp-content/uploads/2018/06/12184802_web1_M1-Alderwood-EDH-180611.jpg",
-			          "subtitle": "3.6km $2.4 per hour",
-			          "buttons": [
-			            {
-			              "title": "Reserve",
-			              "type": "BUTTON_TYPE",
-			              "value": "Quiero confirmar mi reserva en el lugar "  + spots[1].ID_SPOT,
-			            }
-			          ]
-			        },
-			        {
-			          "title": spots[2].DIRECCION,
-			          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Industrial_Trust_Building_Providence_RI.jpg/1200px-Industrial_Trust_Building_Providence_RI.jpg",
-			          "subtitle": "5.3km $4.2 per hour",
-			          "buttons": [
-			            {
-			              "title": "Reserve",
-			              "type": "BUTTON_TYPE",
-			              "value": "Quiero confirmar mi reserva en el lugar " + spots[2].ID_SPOT,
-			            }
-			          ]
-			        }
-			      ],
-			      "buttons": [
-			        {
-			          "title": "Selecciona un lugar para estacionarte",
-			          "type": "BUTTON_TYPE",
-			          "value": ""
-			        }
-			      ],
-			    }
-			  }]
-		  }); 
+			replies: [{
+				"type": "list",
+				"content": {
+					"elements": [
+					{
+						"title": spots[0].DIRECCION,
+						"imageUrl": "https://dqbasmyouzti2.cloudfront.net/assets/content/cache/made/content/images/articles/Office_Buildings_Demand_Response_XL_721_420_80_s_c1.jpg",
+						"subtitle": "2.8km $2 per hour",
+						"buttons": [
+						{
+							"title": "Reserve",
+							"type": "BUTTON_TYPE",
+							"value": "Quiero confirmar mi reserva en el lugar "  + spots[0].ID_SPOT,
+						}
+						]
+					},
+					{
+						"title": spots[1].DIRECCION,
+						"imageUrl": "https://2qibqm39xjt6q46gf1rwo2g1-wpengine.netdna-ssl.com/wp-content/uploads/2018/06/12184802_web1_M1-Alderwood-EDH-180611.jpg",
+						"subtitle": "3.6km $2.4 per hour",
+						"buttons": [
+						{
+							"title": "Reserve",
+							"type": "BUTTON_TYPE",
+							"value": "Quiero confirmar mi reserva en el lugar "  + spots[1].ID_SPOT,
+						}
+						]
+					},
+					{
+						"title": spots[2].DIRECCION,
+						"imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Industrial_Trust_Building_Providence_RI.jpg/1200px-Industrial_Trust_Building_Providence_RI.jpg",
+						"subtitle": "5.3km $4.2 per hour",
+						"buttons": [
+						{
+							"title": "Reserve",
+							"type": "BUTTON_TYPE",
+							"value": "Quiero confirmar mi reserva en el lugar " + spots[2].ID_SPOT,
+						}
+						]
+					}
+					],
+					"buttons": [
+					{
+						"title": "Selecciona un lugar para estacionarte",
+						"type": "BUTTON_TYPE",
+						"value": ""
+					}
+					],
+				}
+			}]
+		}); 
 	})
 })
 
@@ -650,7 +685,7 @@ app.post('/reservarRecast',function(req,res){
 			var UBICACION_DESC = spots[0].DIRECCION;
 			var fecha1 =  new Date(Date.now()-7200000-120000-14400000);
 			var fecha2 = new Date(Date.now()+99999999);
-			var PLACA =  '556HRZ';
+			var PLACA =  'Jonathan';
 			var ESTATUS = "Pending";
 
 			info = {
@@ -664,7 +699,7 @@ app.post('/reservarRecast',function(req,res){
 				UBICACION_DESC: spots[0].DIRECCION,
 				FECHA_RENT_INICIO: '/Date('+String(fecha1.getTime())+')/',
 				FECHA_RENT_FIN: '/Date('+String(fecha2.getTime())+')/',
-				PLACA: '556HRZ',
+				PLACA: 'Jonathan',
 				ESTATUS: "Pending"
 			}
 			console.log(info);
@@ -672,12 +707,12 @@ app.post('/reservarRecast',function(req,res){
 				console.log(data.d);
 
 				var options = {
-				method:'GET',
-				url: 'https://i848070trial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
+					method:'GET',
+					url: 'https://i848070trial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
 				// url: 'https://innovator.authentication.eu10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
 				  // url: 'https://i861443trial.authentication.eu10.hana.ondemand.com/oauth/token?grant_type=client_credentials',
 				  headers: {
-				    'Authorization': 'Basic c2ItZDIwNzlmYzItZjg0Ni00ZjhmLWE0N2MtZDBmYmU0YTM1YWI2IWIxNTg5fG5hLTNhMDFmMWUyLWJjMzMtNGUxMi04NmEyLWZmZmZhZWE3OTkxOCFiMzM6R3BxQ2NSYS9tQ25qS1dRTDdNY0w4U1VmRmdvPQ=='
+				  	'Authorization': 'Basic c2ItZDIwNzlmYzItZjg0Ni00ZjhmLWE0N2MtZDBmYmU0YTM1YWI2IWIxNTg5fG5hLTNhMDFmMWUyLWJjMzMtNGUxMi04NmEyLWZmZmZhZWE3OTkxOCFiMzM6R3BxQ2NSYS9tQ25qS1dRTDdNY0w4U1VmRmdvPQ=='
 				  }
 				};
 
@@ -691,13 +726,13 @@ app.post('/reservarRecast',function(req,res){
 					console.log(cuerpo);
 
 					var options = {
-					method:'POST',
-					url: 'https://hyperledger-fabric.cfapps.us10.hana.ondemand.com/api/v1/chaincodes/8a8a09c1-2ef9-4a2b-bcc0-fa896d1af9dc-com-sap-icn-blockchain-sapsmartparking-booking/latest/' + numero_nuevo,
+						method:'POST',
+						url: 'https://hyperledger-fabric.cfapps.us10.hana.ondemand.com/api/v1/chaincodes/8a8a09c1-2ef9-4a2b-bcc0-fa896d1af9dc-com-sap-icn-blockchain-sapsmartparking-booking/latest/' + numero_nuevo,
 					// url: 'https://hyperledger-fabric.cfapps.eu10.hana.ondemand.com/api/v1/chaincodes/2ddcc9f0-bdc0-4ef4-89b9-870622edcfb2-com-sap-icn-blockchain-holymotion-booking/latest/' + numero_nuevo,
 					  // url: 'https://hyperledger-fabric.cfapps.eu10.hana.ondemand.com/api/v1/chaincodes/279dd4fb-5a3e-46fe-9b7b-2b20ee7c5dd1-com-sap-icn-blockchain-holymotion-booking/latest/' + numero_nuevo,
 					  headers: {
-					    'Authorization': 'bearer ' + cuerpo.access_token,
-					    'Content-type': 'application/x-www-form-urlencoded'
+					  	'Authorization': 'bearer ' + cuerpo.access_token,
+					  	'Content-type': 'application/x-www-form-urlencoded'
 					  },
 					  form: 'placa='+ PLACA +'&idlugar='+ID_SPOT+'&fechahorainicio='+fecha1.toISOString()+'&fechahorafin='+fecha2.toISOString()+'&estatus='+ESTATUS+'&usuario=BrunoRaulGuerreroPadilla'
 					};
@@ -705,22 +740,22 @@ app.post('/reservarRecast',function(req,res){
 					request(options,function(error,response,body){
 						console.log(options);
 						res.send({
-					    replies: [{
-					      type: 'text',
-					      content: 'Tu reserva se realizó de manera satisfactoria con el ID ' + data.d.ID_RESERVA
-					    }]
-					  });   
+							replies: [{
+								type: 'text',
+								content: 'Tu reserva se realizó de manera satisfactoria con el ID ' + data.d.ID_RESERVA
+							}]
+						});   
 
 					});
 
 				});
 			}, function(status, error){
 				res.send({
-				    replies: [{
-				      type: 'text',
-				      content: 'There has been an error, try later.'
-				    }]
-				  });  
+					replies: [{
+						type: 'text',
+						content: 'There has been an error, try later.'
+					}]
+				});  
 			});
 		});		
 	});
@@ -728,11 +763,11 @@ app.post('/reservarRecast',function(req,res){
 
 
 function yyyymmdd() {
-    var now = new Date();
-    var y = now.getFullYear();
-    var m = now.getMonth() + 1;
-    var d = now.getDate();
-    var mm = m < 10 ? '0' + m : m;
-    var dd = d < 10 ? '0' + d : d;
-    return '' + y + '-' + mm + '-' + dd;
+	var now = new Date();
+	var y = now.getFullYear();
+	var m = now.getMonth() + 1;
+	var d = now.getDate();
+	var mm = m < 10 ? '0' + m : m;
+	var dd = d < 10 ? '0' + d : d;
+	return '' + y + '-' + mm + '-' + dd;
 }
